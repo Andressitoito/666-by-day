@@ -8,7 +8,6 @@
  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
   integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css' />
- <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-highway.css" !important>
  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
   crossorigin="anonymous"></script>
  <style>
@@ -90,12 +89,15 @@
 
 
   <script>
+   /* ////////////////////////////////////////////// */
+   /* JQUERY INICIO */
+   /* ////////////////////////////////////////////// */
    $(document).ready(function () {
 
 
-
-
-
+    /* ////////////////////////////////////////////// */
+    /* CARGA / ESCRITURA INICIAL DE DATOS*/
+    /* ////////////////////////////////////////////// */
     let mainData = JSON.parse(localStorage.getItem('mainData'))
 
     if (mainData === null) {
@@ -116,61 +118,160 @@
      mainData = JSON.parse(localStorage.getItem('mainData'))
 
     }
-
-
-
-
+    /* ////////////////////////////////////////////// */
+    /* COMPLETAR LA TABLA CON DATOS DEL LOCALSTORAGE */
+    /* ////////////////////////////////////////////// */
     function completarTablaPorMes() {
 
      mainData = JSON.parse(localStorage.getItem('mainData'))
 
-     let semanas_checksHTML = mainData.mayo.reduce((acc, semana, index) => {
+     /*      let semanas_checksHTML = mainData.mayo.reduce((acc, semana, index) => {
+     
+           return acc +=
+            `
+         <tr class="h3">
+          <td scope="col" class="no-underline">${semana.semana[0][1]}</td>
+          <td scope="col" class="no-underline">${semana.semana[1][1]}</td>
+          <td scope="col" class="no-underline">${semana.semana[2][1]}</td>
+          <td scope="col" class="no-underline">${semana.semana[3][1]}</td>
+          <td scope="col" class="no-underline">${semana.semana[4][1]}</td>
+          <td scope="col" class="no-underline">${semana.semana[5][1]}</td>
+          <td scope="col" class="no-underline">${semana.semana[6][1]}</td>
+          <td rowspan="2" scope="col"></td>
+         </tr>
+         <tr class="">
+          <td scope="col"><button class="btn" id="${semana.semana[0][2]}"><i class="fas fa-exclamation-triangle h2  text-danger"></i></button></td>
+          <td scope="col"><button class="btn" id="${semana.semana[1][2]}"><i class="fas fa-exclamation-triangle h2 text-danger"></i></button></td>
+          <td scope="col"><button class="btn" id="${semana.semana[2][2]}"><i class="fas fa-exclamation-triangle h2 text-danger"></i></button></td>
+          <td scope="col"><button class="btn" id="${semana.semana[3][2]}"><i class="fas fa-exclamation-triangle h2 text-danger"></i></button></td>
+          <td scope="col"><button class="btn" id="${semana.semana[4][2]}"><i class="fas fa-exclamation-triangle h2 text-danger"></i></button></td>
+          <td scope="col"><button class="btn" id="${semana.semana[5][2]}"><i class="fas fa-exclamation-triangle h2 text-danger"></i></button></td>
+          <td scope="col"><button class="btn" id="${semana.semana[6][2]}"><i class="fas fa-exclamation-triangle h2 text-danger"></i></button></td>
+         </tr>
+         `
+          }, '') */
 
-      console.log(semana)
-      return acc +=
-       `
-    <tr class="h3">
-     <td scope="col" class="no-underline">${semana.semana[0][1]}</td>
-     <td scope="col" class="no-underline">${semana.semana[1][1]}</td>
-     <td scope="col" class="no-underline">${semana.semana[2][1]}</td>
-     <td scope="col" class="no-underline">${semana.semana[3][1]}</td>
-     <td scope="col" class="no-underline">${semana.semana[4][1]}</td>
-     <td scope="col" class="no-underline">${semana.semana[5][1]}</td>
-     <td scope="col" class="no-underline">${semana.semana[6][1]}</td>
-     <td rowspan="2" scope="col"></td>
-    </tr>
-    <tr class="">
-     <td scope="col"><button class="btn" id="${semana.semana[0][2]}"><i class="fas fa-exclamation-triangle h2  text-danger"></i></button></td>
-     <td scope="col"><button class="btn" id="${semana.semana[1][2]}"><i class="fas fa-exclamation-triangle h2 text-danger"></i></button></td>
-     <td scope="col"><button class="btn" id="${semana.semana[2][2]}"><i class="fas fa-exclamation-triangle h2 text-danger"></i></button></td>
-     <td scope="col"><button class="btn" id="${semana.semana[3][2]}"><i class="fas fa-exclamation-triangle h2 text-danger"></i></button></td>
-     <td scope="col"><button class="btn" id="${semana.semana[4][2]}"><i class="fas fa-exclamation-triangle h2 text-danger"></i></button></td>
-     <td scope="col"><button class="btn" id="${semana.semana[5][2]}"><i class="fas fa-exclamation-triangle h2 text-danger"></i></button></td>
-     <td scope="col"><button class="btn" id="${semana.semana[6][2]}"><i class="fas fa-exclamation-triangle h2 text-danger"></i></button></td>
-    </tr>
-    `
+
+     let semanas_checksHTML = mainData.mayo.reduce((acc, semana, index) => {
+      let sumaPorSemana = 0
+
+      // console.log(semana)
+      let semanaHTML = ''
+
+      semanaHTML += ` <tr class="">`
+      semana.semana.map((dia, index) => {
+
+       if (dia[0] === 666) {
+        console.log(dia)
+        console.log(dia[0])
+        console.log(dia[1])
+        console.log(dia[2])
+        console.log('index = ' + index)
+        sumaPorSemana += 666
+        return semanaHTML += `
+        <td scope="col"><button class="btn" id="${dia[2]}"><i class="far fa-smile-beam h2 text-color-1"></i><i class="fas fa-money-bill-wave h3 text-success"></i>
+        </button></td>
+        `
+       } else {
+        return semanaHTML += `
+        <td scope="col"><button class="btn" id="${dia[2]}"><i class="fas fa-exclamation-triangle h2 text-danger"></i></button></td>
+        `
+       }
+
+
+
+      })
+      semanaHTML += `<td rowspan="" class=" h2" scope="col">${sumaPorSemana}</td>`
+
+      semanaHTML += `</tr>`
+      // console.log(semanaHTML)
+      console.log(sumaPorSemana)
+
+      return acc += semanaHTML
+
      }, '')
+
+     // console.log(semanas_checksHTML)
 
      document.querySelector('#table-body-to-fill').innerHTML = semanas_checksHTML
     }
 
     completarTablaPorMes()
 
+    /* ////////////////////////////////////////////// */
+    /* ADD EVENT LISTENER PARA EL CLICK EN LA TABLA */
+    /* ////////////////////////////////////////////// */
     document.querySelector('#table-body-to-fill').addEventListener('click', (e) => {
      e.preventDefault()
      let item = e.target
-     console.log(item.id)
+     console.log(item.parentElement.id)
+     console.log(item.parentElement)
+
+     if (item.classList[1] === 'fa-exclamation-triangle') {
+      index = parseInt(item.parentElement.id)
+      textIndex = item.parentElement.id
+      exclamationToSmile(index)
+     }
+     completarTablaPorMes()
+
     })
+    /* ////////////////////////////////////////////// */
+    /* CONVERTIR DE EXCLAMACION A SMILE CON BILLETE */
+    /* ////////////////////////////////////////////// */
+    function exclamationToSmile(index) {
+     mainData = JSON.parse(localStorage.getItem('mainData'))
+
+     let { mayo } = mainData
+
+     for (let semana of mayo) {
+      for (let dias of semana.semana) {
+       if (dias[2] === index) {
+        dias[0] = 666
+        console.log(dias)
+       }
+      }
+     }
+     localStorage.setItem('mainData', JSON.stringify(mainData))
+    }
+    /* ////////////////////////////////////////////// */
+    /* CONVERTIR DE SMILE CON BILLETE A EXCLAMACION */
+    /* ////////////////////////////////////////////// */
+    function smileToExclamation(index) {
+     mainData = JSON.parse(localStorage.getItem('mainData'))
+
+     let { mayo } = mainData
+
+     for (let semana of mayo) {
+      for (let dias of semana.semana) {
+       if (dias[2] === index) {
+        dias[0] = 0
+        console.log(dias)
+       }
+      }
+     }
+     localStorage.setItem('mainData', JSON.stringify(mainData))
+    }
 
 
 
 
 
+    mainData = JSON.parse(localStorage.getItem('mainData'))
+
+    // console.log(mainData.mayo[0].semana[4][0])
+
+    // mainData.mayo[0].semana[4][0] = 666
+
+    // localStorage.setItem('mainData', JSON.stringify(mainData))
 
 
 
-
+    /* JQUERY END */
    })
+
+
+
+
   </script>
  </div>
 
