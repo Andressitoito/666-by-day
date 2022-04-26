@@ -45,7 +45,8 @@
   <table class="table text-center w-50 mx-auto my-5 bg-color-1 w3-food-butter align-items-center">
    <thead>
     <tr class="">
-     <th scope="col" colspan="8" class="h2">MAYO</th>
+     <th scope="col" colspan="7" class="h2">MAYO</th>
+     <th scope="col" colspan="1" class="h2 text-success" id="suma-total-todo">MAYO</th>
     </tr>
    </thead>
    <tr class="h4 bg-color-2 align-items-center">
@@ -151,7 +152,7 @@
       })
 
       /* celda con la suma por semana */
-      semanaHTML += `<td rowspan="2" class="td-centered h2" scope="col">${sumaPorSemana}</td>`
+      semanaHTML += `<td rowspan="2" class="text-success td-centered h2" scope="col">${sumaPorSemana}</td>`
 
       semanaHTML += `</tr>`
       /* TERMINA LA LINEA DE NUMEROS DEL DIA */
@@ -197,7 +198,7 @@
      let item = e.target
      // console.log(item.parentElement.id)
      // console.log(item.parentElement)
-     console.log(item.classList)
+     // console.log(item.classList)
 
      if (item.classList[1] === 'fa-exclamation-triangle') {
       index = parseInt(item.parentElement.id)
@@ -209,6 +210,8 @@
       smileToExclamation(index)
      }
      completarTablaPorMes()
+    sumaTotalDeTodo()
+
     })
     /* ////////////////////////////////////////////// */
     /* CONVERTIR DE EXCLAMACION A SMILE CON BILLETE */
@@ -239,12 +242,27 @@
       for (let dias of semana.semana) {
        if (dias[2] === index) {
         dias[0] = 0
-        console.log(dias)
        }
       }
      }
      localStorage.setItem('mainData', JSON.stringify(mainData))
     }
+    /* ////////////////////////////////////////////// */
+    /* SUMA TOTAL DE TODO */
+    /* ////////////////////////////////////////////// */
+    function sumaTotalDeTodo() {
+     mainData = JSON.parse(localStorage.getItem('mainData'))
+
+     let sumaTotalDeTodo = mainData.mayo.reduce((acc, semana) => {
+      let sumaPorSemana = semana.semana.reduce((acc, dia) => {
+       return acc += dia[0]
+      }, 0)
+      return acc += sumaPorSemana
+     }, 0)
+
+     document.querySelector('#suma-total-todo').innerHTML = sumaTotalDeTodo
+    }
+    sumaTotalDeTodo()
 
     /* JQUERY END */
    })
